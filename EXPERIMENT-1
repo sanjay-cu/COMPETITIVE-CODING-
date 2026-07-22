@@ -1,0 +1,73 @@
+EXPERIMENT:1.1
+
+217. Contains Duplicate
+AIM:Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+Algorithm:
+1.Start
+2.Take the input array nums.
+3.Sort the array in ascending order.
+4.Traverse the sorted array from index 0 to n-2.
+5.Compare the current element nums[i] with the next element nums[i+1].
+6.If both elements are equal, return true because a duplicate exists.
+7.If no adjacent elements are equal after the loop ends, return false.
+
+CODE:class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<nums.size()-1;i++)
+        
+            {
+                if(nums[i]== nums[i+1])
+                {
+                    return true;
+                }
+            }  
+            
+            return false;
+
+    }
+};
+
+
+EXPERIMENT:1.2
+
+219. Contains Duplicate II
+
+AIM:Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+Algorithm:
+1.Start.
+2.Create an empty unordered_map named mp.
+3.Traverse the array nums from index 0 to n-1.
+4.Check if the current element nums[i] is already present in the map using mp.find(nums[i]).
+5.If the element is found, calculate the distance between the current index and the previous index:
+        i - mp[nums[i]]
+6.If the distance is less than or equal to k, return true.
+7.Otherwise, store or update the current element and its index in the map:
+        mp[nums[i]] = i;
+8.Repeat Steps 4–7 for all elements in the array.
+9.If no nearby duplicate is found after the loop ends, return false.
+10.Stop.
+
+CODE:
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int, int>mp;
+        for(int i=0; i<nums.size(); i++)
+        { 
+           if(mp.find(nums[i]) != mp.end())
+                {
+                    if(i-mp[nums[i]]<=k)
+                    {
+                        return true;
+                            
+                    }
+                }
+                mp[nums[i]]=i;
+    }
+        return false;
+    }
+};
+ 
+
